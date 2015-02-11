@@ -1,7 +1,8 @@
 package cn.recursion.crawler.model;
 
 /**
- * Evaluation of an URI.
+ * An implementation of {@code AbstractEvaluation} class,
+ * this implementation cares about the <em>bid</em> element of an URI.
  *
  * @author victor li
  * @date 2/11/15
@@ -10,7 +11,9 @@ public class Evaluation extends AbstractEvaluation {
 
     private Double bid;
 
+    @Override
     public Double evaluate() {
+        // TODO
         return 10d;
     }
 
