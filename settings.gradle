@@ -1,0 +1,6 @@
+rootProject.name = 'echo'
+
+include 'crawler'
+
+include 'frontend'
+
