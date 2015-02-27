@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author victor li
  * @date 2/11/15
  */
-public class TargetURI implements Serializable {
+public class URI implements Serializable {
 
     private int id;
     private String uri;
