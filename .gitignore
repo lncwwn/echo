@@ -18,3 +18,5 @@ gradle/
 *.iml
 gradlew
 gradlew.bat
+*.ipr
+*.iws
