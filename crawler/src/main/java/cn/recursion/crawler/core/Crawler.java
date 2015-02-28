@@ -2,52 +2,26 @@ package cn.recursion.crawler.core;
 
 import cn.recursion.crawler.model.AbstractCrudeResource;
 import cn.recursion.crawler.model.URI;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-
-import java.io.IOException;
 
 /**
- * {@code ITCrawler} is a sub-class of {@code AbstractCrawler}, only capture websites
- * that related to IT.
+ * {@code Crawler} provides capabilities of fetching website on internet.
  *
  * @author victor li
  * @date 2/27/15
  */
-public class Crawler extends AbstractCrawler {
+public interface Crawler {
 
-    private CloseableHttpClient httpClient;
+    /**
+     * captures contents from the specified uri
+     * @param uri string uri
+     * @return the crude contents of the specified uri
+     */
+    public abstract AbstractCrudeResource capture(String uri);
 
-    public Crawler() {
-        if (null == httpClient)
-            httpClient = HttpClients.createDefault();
-    }
-
-    @Override
-    public AbstractCrudeResource capture(String uri) {
-        HttpGet httpGet = new HttpGet(uri);
-        CloseableHttpResponse response = null;
-        try {
-            response = httpClient.execute(httpGet);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (null != response) {
-                try {
-                    response.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public AbstractCrudeResource capture(URI uri) {
-        return null;
-    }
+    /**
+     * captures contents from the specified uri
+     * @param uri an instance of {@code URI}
+     * @return the crude contents of the specified uri
+     */
+    public abstract AbstractCrudeResource capture(URI uri);
 }
