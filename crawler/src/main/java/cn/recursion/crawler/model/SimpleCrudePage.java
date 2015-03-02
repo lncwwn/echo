@@ -7,7 +7,7 @@ package cn.recursion.crawler.model;
  * @author victor li
  * @date 2/11/15
  */
-public class SimpleCrudePage extends AbstractCrudeResource {
+public class SimpleCrudePage extends CrudeResource {
 
     private String text;
 

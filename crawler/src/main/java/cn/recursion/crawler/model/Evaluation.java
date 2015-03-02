@@ -1,28 +1,28 @@
 package cn.recursion.crawler.model;
 
 /**
- * An implementation of {@code AbstractEvaluation} class,
- * this implementation cares about the <em>bid</em> element of an URI.
+ * Abstract evaluation of an URI.
  *
  * @author victor li
- * @date 2/11/15
+ * @date 2/12/15
  */
-public class Evaluation extends AbstractEvaluation {
+public abstract class Evaluation {
 
-    private Double bid;
+    // score of URI
+    private Double score;
 
-    @Override
-    public Double evaluate() {
-        // TODO
-        return 10d;
+    /**
+     * evaluates the final score of an URI,
+     * according to concrete business
+     */
+    public abstract Double evaluate();
+
+    public Double getScore() {
+        return score;
     }
 
-    public Double getBid() {
-        return bid;
-    }
-
-    public void setBid(Double bid) {
-        this.bid = bid;
+    public void setScore(Double score) {
+        this.score = score;
     }
 
 }

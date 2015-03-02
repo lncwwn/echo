@@ -12,7 +12,7 @@ public class URI implements Serializable {
 
     private int id;
     private String uri;
-    private Evaluation evaluation;
+    private BasicEvaluation evaluation;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class URI implements Serializable {
         this.uri = uri;
     }
 
-    public Evaluation getEvaluation() {
+    public BasicEvaluation getEvaluation() {
         return evaluation;
     }
 
-    public void setEvaluation(Evaluation evaluation) {
+    public void setEvaluation(BasicEvaluation evaluation) {
         this.evaluation = evaluation;
     }
 

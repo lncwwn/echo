@@ -1,7 +1,7 @@
 package cn.recursion.crawler.core.impl;
 
 import cn.recursion.crawler.core.Crawler;
-import cn.recursion.crawler.model.AbstractCrudeResource;
+import cn.recursion.crawler.model.CrudeResource;
 import cn.recursion.crawler.model.URI;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -13,8 +13,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * {@code SimpleCrawler} implements {@code Crawler}
@@ -22,21 +22,21 @@ import java.io.IOException;
  * @author victor li
  * @date 2/27/15
  */
-public class SimpleCrawler implements Crawler {
+public class BasicCrawler implements Crawler {
 
-    private Logger logger = LoggerFactory.getLogger(SimpleCrawler.class);
+    private Logger logger = LoggerFactory.getLogger(BasicCrawler.class);
 
     private CloseableHttpClient httpClient;
 
-    public SimpleCrawler() {
+    public BasicCrawler() {
         if (null == httpClient)
             httpClient = HttpClients.createDefault();
     }
 
-    @Override
-    public AbstractCrudeResource capture(String uri) {
+    public CrudeResource capture(String uri) {
         HttpGet httpGet = new HttpGet(uri);
         CloseableHttpResponse response = null;
+        InputStream in = null;
         try {
             response = httpClient.execute(httpGet);
             int statusCode = response.getStatusLine().getStatusCode();
@@ -44,23 +44,36 @@ public class SimpleCrawler implements Crawler {
             if (statusCode == HttpStatus.SC_OK) {
                 HttpEntity entity = response.getEntity();
                 byte[] b = new byte[1024];
-                entity.getContent().read(b);
-                for (int i = 0; i < b.length; i++) {
-                    System.out.println(new String(b));
+                in = entity.getContent();
+                StringBuilder sb = new StringBuilder();
+                while (in.read(b) != -1) {
+                    sb.append(new String(b));
+                    b = new byte[1024];
                 }
+                in.close();
+                System.out.println(sb.toString());
+                // code 301 MOVED TEMPORARILY
             } else if (statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
+                System.out.println("-----------");
+                // code 404 NOT FOUND
+            } else if (statusCode == HttpStatus.SC_NOT_FOUND) {
 
             }
         } catch (IOException e) {
-            logger.error("Exception occurred when executing " +
-                    "get request by httpClient, the nested exception is ", e);
+            logger.error("failed to execute the GET request by httpClient, the nested exception is ", e);
         } finally {
+            if (null != in) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    logger.error("failed to release InputStream, the nested exception is {}", e);
+                }
+            }
             if (null != response) {
                 try {
                     response.close();
                 } catch (IOException e) {
-                    logger.error("Exception occurred when releasing " +
-                            "connection, the nested exception is {}", e);
+                    logger.error("failed to release http connection, the nested exception is {}", e);
                 }
             }
         }
@@ -68,8 +81,16 @@ public class SimpleCrawler implements Crawler {
     }
 
     @Override
-    public AbstractCrudeResource capture(URI uri) {
+    public CrudeResource capture(URI uri) {
         return null;
+    }
+
+    /**
+     * parse header
+     * @param header
+     */
+    protected void parseHeader(Header header) {
+        // TODO
     }
 
 }

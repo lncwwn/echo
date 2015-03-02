@@ -8,9 +8,10 @@ import java.util.Date;
  * @author victor li
  * @date 2/13/15
  */
-public abstract class AbstractCrudeResource {
+public abstract class CrudeResource {
 
     private int id;
+    private String url;
     private String title;
     private Date created;
 
@@ -20,6 +21,14 @@ public abstract class AbstractCrudeResource {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTitle() {

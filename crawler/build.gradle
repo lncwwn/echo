@@ -1,5 +1,8 @@
 description = 'crawler'
+apply plugin: 'war'
+war.archiveName = 'crawler.war'
 
 dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: httpClientVersion
+    compile group: 'org.htmlparser', name: 'htmlparser', version: htmlParserVersion
 }
