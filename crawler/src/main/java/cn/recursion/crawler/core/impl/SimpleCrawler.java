@@ -5,6 +5,7 @@ import cn.recursion.crawler.model.AbstractCrudeResource;
 import cn.recursion.crawler.model.URI;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * {@code SimpleCrawler} implements {@code Crawler}
@@ -39,14 +39,17 @@ public class SimpleCrawler implements Crawler {
         CloseableHttpResponse response = null;
         try {
             response = httpClient.execute(httpGet);
-            System.out.println(response.getStatusLine());
-            HttpEntity entity = response.getEntity();
-            BufferedInputStream bin = new BufferedInputStream(entity.getContent());
-            System.out.println(bin.read());
-            Header[] hs = response.getAllHeaders();
-            for (Header h : hs) {
-                System.out.print(h.getName() + ":");
-                System.out.println(h.getValue());
+            int statusCode = response.getStatusLine().getStatusCode();
+            // code 200 OK
+            if (statusCode == HttpStatus.SC_OK) {
+                HttpEntity entity = response.getEntity();
+                byte[] b = new byte[1024];
+                entity.getContent().read(b);
+                for (int i = 0; i < b.length; i++) {
+                    System.out.println(new String(b));
+                }
+            } else if (statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
+
             }
         } catch (IOException e) {
             logger.error("Exception occurred when executing " +
