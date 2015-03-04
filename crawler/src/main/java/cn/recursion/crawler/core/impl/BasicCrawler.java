@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * {@code SimpleCrawler} implements {@code Crawler}
+ * {@code BasicCrawler} implements {@code Crawler}
  *
  * @author victor li
  * @date 2/27/15
@@ -54,7 +54,6 @@ public class BasicCrawler implements Crawler {
                 System.out.println(sb.toString());
                 // code 301 MOVED TEMPORARILY
             } else if (statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
-                System.out.println("-----------");
                 // code 404 NOT FOUND
             } else if (statusCode == HttpStatus.SC_NOT_FOUND) {
 
