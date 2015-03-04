@@ -1,7 +1,7 @@
 package cn.recursion.crawler.core.impl;
 
 import cn.recursion.crawler.core.Crawler;
-import cn.recursion.crawler.model.CrudeResource;
+import cn.recursion.crawler.model.CrudePage;
 import cn.recursion.crawler.model.URI;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -33,7 +33,7 @@ public class BasicCrawler implements Crawler {
             httpClient = HttpClients.createDefault();
     }
 
-    public CrudeResource capture(String uri) {
+    public CrudePage capture(String uri) {
         HttpGet httpGet = new HttpGet(uri);
         CloseableHttpResponse response = null;
         InputStream in = null;
@@ -43,12 +43,12 @@ public class BasicCrawler implements Crawler {
             // code 200 OK
             if (statusCode == HttpStatus.SC_OK) {
                 HttpEntity entity = response.getEntity();
-                byte[] b = new byte[1024];
+                byte[] bytes = new byte[1024];
                 in = entity.getContent();
                 StringBuilder sb = new StringBuilder();
-                while (in.read(b) != -1) {
-                    sb.append(new String(b));
-                    b = new byte[1024];
+                while (in.read(bytes) != -1) {
+                    sb.append(new String(bytes));
+                    bytes = new byte[1024];
                 }
                 in.close();
                 System.out.println(sb.toString());
@@ -59,20 +59,23 @@ public class BasicCrawler implements Crawler {
 
             }
         } catch (IOException e) {
-            logger.error("failed to execute the GET request by httpClient, the nested exception is ", e);
+            logger.error("failed to execute the GET request by httpClient," +
+                    " the nested exception is ", e);
         } finally {
             if (null != in) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    logger.error("failed to release InputStream, the nested exception is {}", e);
+                    logger.error("failed to release InputStream," +
+                            " the nested exception is {}", e);
                 }
             }
             if (null != response) {
                 try {
                     response.close();
                 } catch (IOException e) {
-                    logger.error("failed to release http connection, the nested exception is {}", e);
+                    logger.error("failed to release http connection," +
+                            " the nested exception is {}", e);
                 }
             }
         }
@@ -80,12 +83,12 @@ public class BasicCrawler implements Crawler {
     }
 
     @Override
-    public CrudeResource capture(URI uri) {
+    public CrudePage capture(URI uri) {
         return null;
     }
 
     /**
-     * parse header
+     * parse response header
      * @param header
      */
     protected void parseHeader(Header header) {

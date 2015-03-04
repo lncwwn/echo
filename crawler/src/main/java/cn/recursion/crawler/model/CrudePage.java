@@ -8,7 +8,7 @@ import java.util.Date;
  * @author victor li
  * @date 2/13/15
  */
-public abstract class CrudeResource {
+public abstract class CrudePage {
 
     private int id;
     private String url;

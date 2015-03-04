@@ -1,6 +1,6 @@
 package cn.recursion.crawler.core;
 
-import cn.recursion.crawler.model.CrudeResource;
+import cn.recursion.crawler.model.CrudePage;
 import cn.recursion.crawler.model.URI;
 
 /**
@@ -16,6 +16,6 @@ public interface Crawler {
      * @param uri an instance of {@code URI}
      * @return the crude contents of the specified uri
      */
-    public CrudeResource capture(URI uri);
+    public CrudePage capture(URI uri);
 
 }
