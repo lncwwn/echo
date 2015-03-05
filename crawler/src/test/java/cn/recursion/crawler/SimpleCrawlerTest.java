@@ -1,22 +1,22 @@
 package cn.recursion.crawler;
 
-import cn.recursion.crawler.core.impl.SimpleCrawler;
+import cn.recursion.crawler.core.impl.BasicCrawler;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Test {@code SimpleCrawler}
+ * Test {@code BasicCrawler}
  *
  * @author victor li
  * @date 2/28/15
  */
 public class SimpleCrawlerTest {
 
-    private static SimpleCrawler crawler;
+    private static BasicCrawler crawler;
 
     @BeforeClass
     public static void init() {
-        crawler = new SimpleCrawler();
+        crawler = new BasicCrawler();
     }
 
     @Test
