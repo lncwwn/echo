@@ -1,4 +1,4 @@
-package cn.recursion.crawler.model;
+package cn.recursion.crawler.model.abs;
 
 import java.util.Date;
 

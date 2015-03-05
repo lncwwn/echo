@@ -1,4 +1,4 @@
-package cn.recursion.crawler.model;
+package cn.recursion.crawler.model.abs;
 
 /**
  * Abstract evaluation of an URI.

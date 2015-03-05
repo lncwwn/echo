@@ -1,6 +1,6 @@
 package cn.recursion.crawler.core;
 
-import cn.recursion.crawler.model.CrudePage;
+import cn.recursion.crawler.model.abs.CrudePage;
 import cn.recursion.crawler.model.URI;
 
 /**

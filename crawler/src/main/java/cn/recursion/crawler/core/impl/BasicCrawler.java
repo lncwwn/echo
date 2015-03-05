@@ -1,7 +1,7 @@
 package cn.recursion.crawler.core.impl;
 
 import cn.recursion.crawler.core.Crawler;
-import cn.recursion.crawler.model.CrudePage;
+import cn.recursion.crawler.model.abs.CrudePage;
 import cn.recursion.crawler.model.URI;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;

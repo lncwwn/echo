@@ -1,5 +1,7 @@
 package cn.recursion.crawler.model;
 
+import cn.recursion.crawler.model.abs.Evaluation;
+
 /**
  * An implementation of {@code Evaluation} class,
  * this implementation cares about the <em>bid</em> element of an URI.

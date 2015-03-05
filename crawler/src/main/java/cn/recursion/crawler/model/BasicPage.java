@@ -1,5 +1,7 @@
 package cn.recursion.crawler.model;
 
+import cn.recursion.crawler.model.abs.CrudePage;
+
 /**
  * The simple implementation of {@code CrudeResource},
  * only contains the necessary information without the whole DOM of crude resource.
