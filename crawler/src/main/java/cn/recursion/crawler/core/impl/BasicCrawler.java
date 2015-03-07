@@ -105,6 +105,8 @@ public class BasicCrawler implements Crawler {
     protected void parseHtml(String html, String encoding) {
         if (!StringUtils.isEmpty(html)) {
             Parser parser = Parser.createParser(html, encoding);
+//            NodeVisitor vistors =
+//            parser.visitAllNodesWith();
         }
     }
 
