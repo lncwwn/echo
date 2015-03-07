@@ -1,8 +1,9 @@
 package cn.recursion.crawler.core.impl;
 
+import cn.recursion.core.util.StringUtils;
 import cn.recursion.crawler.core.Crawler;
-import cn.recursion.crawler.model.abs.CrudePage;
 import cn.recursion.crawler.model.URI;
+import cn.recursion.crawler.model.abs.CrudePage;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.htmlparser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -93,6 +95,17 @@ public class BasicCrawler implements Crawler {
      */
     protected void parseHeader(Header header) {
         // TODO
+    }
+
+    protected void parseHtml(String html) {
+        String encoding = "UTF8";
+        parseHtml(html, encoding);
+    }
+
+    protected void parseHtml(String html, String encoding) {
+        if (!StringUtils.isEmpty(html)) {
+            Parser parser = Parser.createParser(html, encoding);
+        }
     }
 
 }
